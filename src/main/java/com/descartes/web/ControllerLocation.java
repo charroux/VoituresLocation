@@ -12,48 +12,38 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import com.descartes.service.ServiceLocation;
+
 @Controller
 public class ControllerLocation {
 
-	List<Voiture> voitures = new ArrayList<Voiture>();
-	
-	public ControllerLocation(){
-		Voiture v = new Voiture("AA11EE", "Ferrari");
-		voitures.add(v);
-	}
+	ServiceLocation serviceLocation = new  ServiceLocation();
 	
 	@RequestMapping(value="/voitures", method=RequestMethod.GET)
 	@ResponseBody
 	@ResponseStatus(HttpStatus.OK)
 	public List<Voiture> getListeVoiture(){		
-		System.out.println("getListeVoiture()");
-		return voitures;
+		return serviceLocation.listerVoitures();
 	}
 
 	@RequestMapping(value="/voiture", method=RequestMethod.POST)
 	@ResponseStatus(HttpStatus.OK)
 	public void addVoitureParBodyHTTP(@RequestBody Voiture voiture){
-		System.out.println("addVoitureParBodyHTTP : " + voiture);
-		voitures.add(voiture);
+		serviceLocation.ajouterVoiture(voiture);
 	}
 	
 	@RequestMapping(value="/voiture", method=RequestMethod.PUT)
 	@ResponseStatus(HttpStatus.OK)
 	public void modifierVoiture( @RequestBody Voiture voiture){
 		System.out.println("modifierVoiture : " + voiture);
-		int index = voitures.indexOf(voiture);
-		if(index != -1){
-			voitures.remove(index);
-			voiture.setImmatriculation("xxxxx");
-			voitures.add(voiture);
-		}
+		// ...
 	}
 	
 	@RequestMapping(value="/voiture", method=RequestMethod.DELETE)
 	@ResponseStatus(HttpStatus.OK)
 	public void deleteVoiture( @RequestBody Voiture voiture){
 		System.out.println("deleteVoiture : " + voiture);
-		voitures.remove(voiture);
+		// ...
 	}
 	
 
