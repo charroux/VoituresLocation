@@ -1,0 +1,12 @@
+<div>
+<form novalidate>
+	Voitures :
+	<select ng-options="voiture.immatriculation for voiture in listeVoitures" ng-model="voitureChoisie">
+	</select>
+	<input type="button" ng-click="selectionVoiture(voitureChoisie)" value="Voir" >
+</form>
+
+Pour debugger :<br> 
+- listeVoitures : {{listeVoitures | json}}<br>
+- voitureChoisie : {{voitureChoisie | json}} 
+</div>
